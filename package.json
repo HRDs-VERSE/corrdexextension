@@ -1,0 +1,203 @@
+{
+    "name": "corrdex",
+    "displayName": "Corrdex",
+    "publisher": "Corrdex",
+    "version": "1.0.11",
+    "description": "Corrdex intelligent AI coding assistant and architecture enforcement",
+    "icon": "media/corrdex-logo.png",
+    "type": "module",
+    "main": "./dist/client/index.cjs",
+    "bin": {
+        "corrdex": "./dist/cli/index.cjs",
+        "mergelens": "./dist/cli/index.cjs"
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run build -- --production",
+        "build": "node esbuild.js",
+        "watch": "node esbuild.js --watch",
+        "test": "node --loader ts-node/esm test/run-tests.ts"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/corrdex/corrdex-extension"
+    },
+    "engines": {
+        "vscode": "^1.107.0"
+    },
+    "activationEvents": [
+        "onLanguage:typescript",
+        "onLanguage:javascript",
+        "onLanguage:typescriptreact",
+        "onLanguage:javascriptreact",
+        "onLanguage:python",
+        "onView:corrdexSidebar",
+        "onView:corrdexAIView",
+        "onCommand:corrdex.refreshSidebar",
+        "onCommand:corrdex.openConfig",
+        "onCommand:corrdex.openAI",
+        "onCommand:corrdex.focusAI",
+        "onCommand:corrdex.openAISettings",
+        "onCommand:corrdex.setAIApiKey",
+        "onCommand:corrdex.clearAIApiKey",
+        "onCommand:corrdex.syncToServer"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "corrdex.refreshSidebar",
+                "title": "Corrdex: Refresh Sidebar"
+            },
+            {
+                "command": "corrdex.openAI",
+                "title": "Open Corrdex Sidebar",
+                "icon": {
+                    "light": "media/corrdex-logo.svg",
+                    "dark": "media/corrdex-logo.svg"
+                }
+            },
+            {
+                "command": "corrdex.focusAI",
+                "title": "Corrdex: Focus AI"
+            },
+            {
+                "command": "corrdex.openAISettings",
+                "title": "Corrdex: Open AI Settings"
+            },
+            {
+                "command": "corrdex.setAIApiKey",
+                "title": "Corrdex: Set AI API Key"
+            },
+            {
+                "command": "corrdex.clearAIApiKey",
+                "title": "Corrdex: Clear AI API Key"
+            },
+            {
+                "command": "corrdex.openConfig",
+                "title": "Corrdex: Open Config"
+            },
+            {
+                "command": "corrdex.syncToServer",
+                "title": "Corrdex: Sync to Server"
+            }
+        ],
+        "viewsContainers": {
+            "secondarySidebar": [
+                {
+                    "id": "corrdexAI",
+                    "title": "Corrdex AI",
+                    "icon": "media/corrdex-logo.svg"
+                }
+            ]
+        },
+        "views": {
+            "explorer": [
+                {
+                    "id": "corrdexSidebar",
+                    "name": "Corrdex"
+                }
+            ],
+            "corrdexAI": [
+                {
+                    "type": "webview",
+                    "id": "corrdexAIView",
+                    "name": "Ask Corrdex"
+                }
+            ]
+        },
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "corrdex.openAI",
+                    "group": "navigation"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "corrdex.refreshSidebar",
+                    "when": "view == corrdexSidebar",
+                    "group": "navigation"
+                },
+                {
+                    "command": "corrdex.openConfig",
+                    "when": "view == corrdexSidebar",
+                    "group": "navigation"
+                },
+                {
+                    "command": "corrdex.openAI",
+                    "when": "view == corrdexSidebar",
+                    "group": "navigation"
+                },
+                {
+                    "command": "corrdex.focusAI",
+                    "when": "view == corrdexSidebar",
+                    "group": "navigation"
+                },
+                {
+                    "command": "corrdex.openAISettings",
+                    "when": "view == corrdexAIView",
+                    "group": "navigation"
+                },
+                {
+                    "command": "corrdex.setAIApiKey",
+                    "when": "view == corrdexAIView",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "configuration": {
+            "title": "Corrdex",
+            "properties": {
+                "corrdex.ai.serverBaseUrl": {
+                    "type": "string",
+                    "default": "https://api.corrdex.app/v1",
+                    "description": "Base URL for Corrdex AI backend calls. Can be set with or without the /v1 suffix."
+                },
+                "corrdex.ai.includeContext": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Include the resolved Corrdex context payload in remote AI answer responses when the backend supports it."
+                },
+                "corrdex.ai.openOnStartup": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Open Corrdex AI automatically when a workspace window starts."
+                },
+                "corrdex.core.serverBaseUrl": {
+                    "type": "string",
+                    "default": "https://core.corrdex.app",
+                    "description": "Base URL for the local Corrdex core analysis service that receives AST snapshots from the extension."
+                },
+                "corrdex.serverBaseUrl": {
+                    "type": "string",
+                    "default": "https://api.corrdex.app",
+                    "description": "Base URL for Corrdex Server to which the index will be pushed."
+                },
+                "corrdex.autoSyncOnSave": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Automatically push the project index to Corrdex Server when a file is saved."
+                }
+            }
+        }
+    },
+    "dependencies": {
+        "@corrdex/shared": "^1.0.0",
+        "@modelcontextprotocol/inspector": "^0.21.2",
+        "@modelcontextprotocol/sdk": "^1.29.0",
+        "express": "^5.2.1",
+        "marked": "^18.0.5",
+        "typescript": "^6.0.3",
+        "vscode-languageclient": "^9.0.1",
+        "vscode-languageserver": "^9.0.1",
+        "vscode-languageserver-textdocument": "^1.0.12"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/glob": "^8.1.0",
+        "@types/node": "^25.8.0",
+        "@types/vscode": "^1.107.0",
+        "esbuild": "^0.28.1",
+        "ts-node": "^10.9.2"
+    }
+}
