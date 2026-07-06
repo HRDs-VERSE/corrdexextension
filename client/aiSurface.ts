@@ -1845,10 +1845,27 @@ function isCapabilityQuestion(question: string): boolean {
     return false;
   }
 
+  const compact = normalized.replace(/\s+/g, " ").trim();
+  const explicitCapabilityQuestions = new Set([
+    "what can you do",
+    "what can you do here",
+    "what can you do for this codebase",
+    "how can you help",
+    "how can you help here",
+    "what are your capabilities",
+    "show capabilities",
+    "capabilities",
+  ]);
+
+  if (explicitCapabilityQuestions.has(compact)) {
+    return true;
+  }
+
   return (
-    matchesAny(normalized, ["what can you do", "help me", "how can you help", "capabilities"]) ||
-    (normalized.includes("what") && normalized.includes("do") && normalized.includes("here")) ||
-    (normalized.includes("what") && normalized.includes("do") && normalized.includes("codebase"))
+    compact.startsWith("what can you do ") ||
+    compact.startsWith("how can you help ") ||
+    compact.startsWith("show me your capabilities") ||
+    compact.startsWith("tell me your capabilities")
   );
 }
 

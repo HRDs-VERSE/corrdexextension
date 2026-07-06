@@ -97,6 +97,8 @@ export class ProjectRuntimeStore {
           } else {
             lastError = new Error(response.persistResult.message || "Unknown error from server");
           }
+        } else if (response) {
+          lastError = new Error("Corrdex core response missing persistResult for sync request.");
         }
       } catch (err) {
         console.error("Failed to persist workspace:", err);

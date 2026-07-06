@@ -83,10 +83,19 @@ export function parsePythonASTBatch(filePaths: string[]): Record<string, ASTMeta
 }
 
 function resolvePythonScriptPath(): string {
-  let pythonScriptPath = path.resolve(_dirname, "./python_ast_parser.py");
-  if (!fs.existsSync(pythonScriptPath)) {
-    pythonScriptPath = path.resolve(_dirname, "../python_ast_parser.py");
+  const pathsToCheck = [
+    path.resolve(_dirname, "./python_ast_parser.py"),
+    path.resolve(_dirname, "../python_ast_parser.py"),
+    path.resolve(_dirname, "../../python_ast_parser.py"),
+  ];
+
+  for (const p of pathsToCheck) {
+    if (fs.existsSync(p)) {
+      return p;
+    }
   }
-  return pythonScriptPath;
+
+  // Fallback to the original expected path so the error message makes sense if not found
+  return pathsToCheck[1];
 }
 

@@ -2,7 +2,7 @@
     "name": "corrdex",
     "displayName": "Corrdex",
     "publisher": "Corrdex",
-    "version": "1.0.11",
+    "version": "1.0.14",
     "description": "Corrdex intelligent AI coding assistant and architecture enforcement",
     "icon": "media/corrdex-logo.png",
     "type": "module",
@@ -20,8 +20,20 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/corrdex/corrdex-extension"
+        "url": "https://github.com/HRDs-VERSE/corrdexextension"
     },
+    "categories": [
+        "Machine Learning",
+        "Linters",
+        "Programming Languages"
+    ],
+    "keywords": [
+        "AI",
+        "assistant",
+        "architecture",
+        "LLM",
+        "copilot"
+    ],
     "engines": {
         "vscode": "^1.107.0"
     },
