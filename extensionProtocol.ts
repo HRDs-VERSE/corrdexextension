@@ -12,6 +12,7 @@ export interface SyncToServerResponse {
   ok: boolean;
   message: string;
   filesUploaded?: number;
+  jobId?: string;
   indexRun?: { ok: boolean; status?: number; runId?: string };
   scanRun?: { ok: boolean; status?: number; runId?: string };
 }

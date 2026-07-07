@@ -17,6 +17,8 @@ export function parsePythonAST(filePath: string): ASTMetadata {
     const output = execFileSync("python", [pythonScriptPath, filePath], {
       encoding: "utf-8",
       maxBuffer: 10 * 1024 * 1024, // 10MB
+      stdio: "pipe",
+      windowsHide: true,
     });
 
     const parsed = JSON.parse(output);
@@ -60,7 +62,9 @@ export function parsePythonASTBatch(filePaths: string[]): Record<string, ASTMeta
     // Run batch script synchronously. We use an output file to avoid stdout maxBuffer issues (ENOBUFS)
     execFileSync("python", [pythonScriptPath, "--batch", tempFilePath, tempOutFilePath], {
       encoding: "utf-8",
-      stdio: "inherit",
+      stdio: "pipe",
+      windowsHide: true,
+      maxBuffer: 10 * 1024 * 1024,
     });
 
     if (!fs.existsSync(tempOutFilePath)) {

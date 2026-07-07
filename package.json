@@ -2,7 +2,7 @@
     "name": "corrdex",
     "displayName": "Corrdex",
     "publisher": "Corrdex",
-    "version": "1.0.14",
+    "version": "1.0.19",
     "description": "Corrdex intelligent AI coding assistant and architecture enforcement",
     "icon": "media/corrdex-logo.png",
     "type": "module",
@@ -194,7 +194,7 @@
         }
     },
     "dependencies": {
-        "@corrdex/shared": "^1.0.0",
+        "@corrdex/shared": "^1.0.5",
         "@modelcontextprotocol/inspector": "^0.21.2",
         "@modelcontextprotocol/sdk": "^1.29.0",
         "express": "^5.2.1",
