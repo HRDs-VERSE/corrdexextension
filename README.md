@@ -67,3 +67,7 @@ You can customize the extension via your VS Code Settings (`Ctrl+,`):
 - `Corrdex: Set AI API Key`: Securely store your API Key.
 - `Corrdex: Clear AI API Key`: Removes your API Key from storage.
 - `Corrdex: Refresh Sidebar`: Refreshes the project overview in the Explorer.
+
+
+## VSX Namespace verification request
+Verifying ownership for Open VSX namespace claim: [(link to your GitHub issue here)](https://github.com/EclipseFdn/open-vsx.org/issues/11615)
