@@ -71,3 +71,10 @@ You can customize the extension via your VS Code Settings (`Ctrl+,`):
 
 ## VSX Namespace verification request
 Verifying ownership for Open VSX namespace claim: [(link to your GitHub issue here)](https://github.com/EclipseFdn/open-vsx.org/issues/11615)
+
+## Open VSX Namespace Verification (GitHub: @corrdex)
+
+This commit is made from the GitHub account associated with the Open VSX namespace request to verify ownership of the Corrdex VS Code extension.
+
+Open VSX namespace request:
+https://github.com/EclipseFdn/open-vsx.org/issues/11615
